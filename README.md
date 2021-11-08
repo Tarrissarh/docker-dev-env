@@ -11,7 +11,7 @@
     - Ignore filemode changes:
         - ```git config core.filemode false```
         - ```git config --global core.filemode false```
-- Log in container: ```docker exec -it [container_id] bash [/bin/sh]```
+- Log in container: ```docker exec -it [container_id or container_name] bash [/bin/sh]```
 
 ## Containers:
 

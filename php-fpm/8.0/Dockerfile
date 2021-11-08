@@ -61,6 +61,7 @@ RUN apk add --no-cache --update \
     tidyhtml-dev  \
     libxslt-dev \
     libzip-dev \
+    g++ \
     $PHPIZE_DEPS
 
 # Install PHP modules
@@ -74,7 +75,7 @@ RUN set -xe \
     && docker-php-ext-enable imagick
 
 # xdebug
-RUN if [ $DEV_ENV == 'local' ]; then pecl install xdebug ; fi
+RUN if [[ $DEV_ENV == 'local' || $DEV_ENV == 'dev' ]]; then pecl install xdebug ; fi
 
 # memcached
 RUN pecl install memcached
@@ -82,7 +83,7 @@ RUN pecl install memcached
 # mongodb
 RUN pecl install mongodb
 
-# Install default extensions
+# Install default extensions (install directory: /usr/local/etc/php/conf.d/)
 # Core, ctype, curl, date, dom, fileinfo, filter, ftp, hash, iconv, json, libxml, mbstring,
 # mysqlnd, openssl, pcre, PDO, pdo_sqlite, Phar, posix, readline, Reflection, session, SimpleXML,
 # sodium, SPL, sqlite3, standard, tokenizer, xml, xmlreader, xmlwriter, zlib
@@ -141,6 +142,9 @@ WORKDIR $APP_DIR
 # Clear cache
 RUN docker-php-source delete \
     && rm -rf /tmp/* /var/cache/apk/*
+
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+COPY ./ini /usr/local/etc/php/conf.d
 
 USER $USER_NAME
 

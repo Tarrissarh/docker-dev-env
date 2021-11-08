@@ -88,8 +88,6 @@ services:
       - mysql
     volumes:
       - ${LOCAL_PROJECTS_DIR}:${CONTAINER_PROJECTS_DIR}
-      - ./php-fpm/${PHP_VERSION}/ini:/usr/local/etc/php/conf.d
-      - ./php-fpm/${PHP_VERSION}/php.ini:/usr/local/etc/php/php.ini
       - ./php-fpm/${PHP_VERSION}/www.conf:/usr/local/etc/php-fpm.d/www.conf
     ports:
       - "${PHP_XDEBUG_PORT}:9000"
@@ -160,7 +158,7 @@ services:
       - php-fpm
     volumes:
       - ./volumes/rabbitmq/:/var/lib/rabbitmq/
-      - ./logs/rabbitmq/:/var/log/rabbitmq
+      - ./logs/rabbitmq/:/var/log/rabbitmq/log
     ports:
       - "${RABBITMQ_PORT_1}:5672"
       - "${RABBITMQ_PORT_2}:15672"

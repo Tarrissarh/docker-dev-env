@@ -14,6 +14,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - postgres
 - gitlab/confluence/jira
 
+## [0.0.2] - 2021-11-08
+
+### Added
+
+- Add containers:
+  - 
+
+### Changed
+
+- nginx host files
+- ini files for php-fpm
+- dockerfile for php-fpm
+
+### Removed
+
+- ...
+
+### Fixed
+
+- ...
+
 ## [0.0.1] - 2021-11-08
 
 ### Added
